@@ -78,7 +78,7 @@ extension HandwritingLearnViewController {
         let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.PremultipliedFirst.rawValue)
         var data = pixels
         let providerRef = CGDataProviderCreateWithCFData(NSData(bytes: &data, length: data.count * sizeof(PixelData)))
-        let cgim = CGImageCreate(28, 28, 8, 32, 28 * sizeof(PixelData), rgbColorSpace, bitmapInfo, providerRef, nil, true, CGColorRenderingIntent.RenderingIntentDefault)
+        let cgim = CGImageCreate(28, 28, 8, 32, 28 * sizeof(PixelData), rgbColorSpace, bitmapInfo, providerRef!, nil, true, CGColorRenderingIntent.RenderingIntentDefault)
         return UIImage(CGImage: cgim!)
     }
     

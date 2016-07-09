@@ -187,10 +187,10 @@ extension HandwritingViewController {
         
         self.handwritingView.imageView.image = character
         
-        let pixelData = CGDataProviderCopyData(CGImageGetDataProvider(character.CGImage))
+        let pixelData = CGDataProviderCopyData(CGImageGetDataProvider(character.CGImage!)!)
         let data: UnsafePointer<UInt8> = CFDataGetBytePtr(pixelData)
-        let bytesPerRow = CGImageGetBytesPerRow(character.CGImage)
-        let bytesPerPixel = (CGImageGetBitsPerPixel(character.CGImage) / 8)
+        let bytesPerRow = CGImageGetBytesPerRow(character.CGImage!)
+        let bytesPerPixel = (CGImageGetBitsPerPixel(character.CGImage!) / 8)
         var position = 0
         for _ in 0..<Int(character.size.height) {
             for _ in 0..<Int(character.size.width) {
@@ -216,9 +216,9 @@ extension HandwritingViewController {
         let newRect = CGRectIntegral(CGRect(x: 0, y: 0, width: size.width, height: size.height))
         UIGraphicsBeginImageContextWithOptions(size, false, 1.0)
         let context = UIGraphicsGetCurrentContext()
-        CGContextSetInterpolationQuality(context, CGInterpolationQuality.None)
+        CGContextSetInterpolationQuality(context!, CGInterpolationQuality.None)
         image.drawInRect(newRect)
-        let newImageRef = CGBitmapContextCreateImage(context)! as CGImage
+        let newImageRef = CGBitmapContextCreateImage(context!)! as CGImage
         let newImage = UIImage(CGImage: newImageRef, scale: 1.0, orientation: UIImageOrientation.Up)
         UIGraphicsEndImageContext()
         return newImage
@@ -231,7 +231,7 @@ extension HandwritingViewController {
         image.drawAtPoint(CGPointMake((28 - image.size.width) / 2, (28 - image.size.height) / 2))
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        return newImage
+        return newImage!
     }
     
     private func clearCanvas() {
@@ -264,13 +264,13 @@ extension HandwritingViewController {
         // Store current image (lines drawn) in context
         self.handwritingView.canvas.image?.drawInRect(CGRect(x: 0, y: 0, width: self.handwritingView.canvas.frame.width, height: self.handwritingView.canvas.frame.height))
         // Append new line to image
-        CGContextMoveToPoint(context, fromPoint.x, fromPoint.y)
-        CGContextAddLineToPoint(context, toPoint.x, toPoint.y)
-        CGContextSetLineCap(context, CGLineCap.Round)
-        CGContextSetLineWidth(context, self.brushWidth)
-        CGContextSetRGBStrokeColor(context, 0, 0, 0, 1.0)
-        CGContextSetBlendMode(context, CGBlendMode.Normal)
-        CGContextStrokePath(context)
+        CGContextMoveToPoint(context!, fromPoint.x, fromPoint.y)
+        CGContextAddLineToPoint(context!, toPoint.x, toPoint.y)
+        CGContextSetLineCap(context!, CGLineCap.Round)
+        CGContextSetLineWidth(context!, self.brushWidth)
+        CGContextSetRGBStrokeColor(context!, 0, 0, 0, 1.0)
+        CGContextSetBlendMode(context!, CGBlendMode.Normal)
+        CGContextStrokePath(context!)
         // Store modified image back to imageView
         self.handwritingView.canvas.image = UIGraphicsGetImageFromCurrentImageContext()
         // End context

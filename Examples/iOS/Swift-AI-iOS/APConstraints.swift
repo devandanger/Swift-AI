@@ -328,7 +328,7 @@ public extension UIView {
             case .IntrinsicContentHeight:
                 newConstraint = NSLayoutConstraint(item: self, attribute: .Height, relatedBy: relation, toItem: constraint.of, attribute: .Height, multiplier: multiplier, constant: intrinsicContentSize().height + constraint.offset)
             case .Baseline:
-                newConstraint = NSLayoutConstraint(item: self, attribute: .Baseline, relatedBy: relation, toItem: constraint.of, attribute: .Baseline, multiplier: multiplier, constant: constraint.offset)
+                newConstraint = NSLayoutConstraint(item: self, attribute: .LastBaseline, relatedBy: relation, toItem: constraint.of, attribute: .LastBaseline, multiplier: multiplier, constant: constraint.offset)
             case .Default:
                 break
             }
@@ -446,7 +446,7 @@ public extension UIView {
             print("Updating constraint .ih is not yet supported")
             return
         case .Baseline:
-            firstAttribute = .Baseline; secondAttribute = .Baseline
+            firstAttribute = .LastBaseline; secondAttribute = .LastBaseline
         case .MaxWidth:
             print("Updating constraint .maxw is not yet supported")
             return
@@ -642,7 +642,7 @@ public extension UIView {
                 parent.addConstraint(NSLayoutConstraint(item: self, attribute: .Height, relatedBy: .Equal, toItem: constraint.1.of, attribute: .Height, multiplier: constraint.1.multiplier, constant: constraint.1.offset))
                 parent.addConstraint(NSLayoutConstraint(item: self, attribute: .Width, relatedBy: .Equal, toItem: constraint.1.of, attribute: .Width, multiplier: constraint.1.multiplier, constant: constraint.1.offset))
             case .Baseline:
-                parent.addConstraint(NSLayoutConstraint(item: self, attribute: .Baseline, relatedBy: .Equal, toItem: constraint.1.of, attribute: .Baseline, multiplier: constraint.1.multiplier, constant: constraint.1.offset))
+                parent.addConstraint(NSLayoutConstraint(item: self, attribute: .LastBaseline, relatedBy: .Equal, toItem: constraint.1.of, attribute: .LastBaseline, multiplier: constraint.1.multiplier, constant: constraint.1.offset))
             case .MaxWidth:
                 print("Max Width is not supported")
                 break

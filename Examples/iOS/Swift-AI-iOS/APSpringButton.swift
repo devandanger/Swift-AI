@@ -51,7 +51,7 @@ public class APSpringButton: UIButton {
         }
     }
     
-    override public func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
+    override public func touchesCancelled(touches: Set<UITouch>, withEvent event: UIEvent?) {
         super.touchesCancelled(touches, withEvent: event)
         UIView.animateWithDuration(self.releaseSpringDuration, delay: 0, usingSpringWithDamping: self.releaseSpringDamping, initialSpringVelocity: 0, options: [.CurveLinear, .AllowUserInteraction], animations: { () -> Void in
             self.transform = CGAffineTransformIdentity

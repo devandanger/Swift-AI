@@ -192,22 +192,22 @@ class GraphViewController: UIViewController {
         let startY = self.sineFunc(-5) // Our graph starts at '-5'
         let yOrigin = (UIScreen.mainScreen().bounds.width - 20) / 2 - 4
         let yPos = yOrigin + (CGFloat(startY * -250) + 125) // Offset
-        CGContextMoveToPoint(context, 0, CGFloat(yPos))
+        CGContextMoveToPoint(context!, 0, CGFloat(yPos))
         for index in 0..<self.numPoints {
             // Append new line to curve
             let x = (-500 + (Float(index) * 1000) / Float(self.numPoints)) / 100
             let y = self.sineFunc(x)
             let xPos = CGFloat(index) * ((UIScreen.mainScreen().bounds.width - 20) / CGFloat(self.numPoints)) * 0.99
             let yPos = yOrigin + CGFloat(y * -250) + 125
-            CGContextAddLineToPoint(context, CGFloat(xPos), CGFloat(yPos))
+            CGContextAddLineToPoint(context!, CGFloat(xPos), CGFloat(yPos))
         }
         // Set line properties
-        CGContextSetLineCap(context, CGLineCap.Round)
-        CGContextSetLineWidth(context, 2)
+        CGContextSetLineCap(context!, CGLineCap.Round)
+        CGContextSetLineWidth(context!, 2)
         var red: CGFloat = 0, green: CGFloat = 0, blue: CGFloat = 0
         UIColor.swiftGreen().getRed(&red, green: &green, blue: &blue, alpha: nil)
-        CGContextSetRGBStrokeColor(context, red, green, blue, 1)
-        CGContextStrokePath(context)
+        CGContextSetRGBStrokeColor(context!, red, green, blue, 1)
+        CGContextStrokePath(context!)
         // Store modified image back to imageView
         self.graphView.graphTargetView.image = UIGraphicsGetImageFromCurrentImageContext()
         // End context
